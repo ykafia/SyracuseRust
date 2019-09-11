@@ -24,15 +24,17 @@ impl Add<Value> for Value{
     type Output = Value;
 
     fn add(self, other: Value) -> Value {
-        let added = self.x + other.x;
-        if( added < self.x)||(added<other.y)
-        {
-            Value {x: self.x + other.x, y: self.y + other.y+1}
+
+        let added = self.x.checked_add(other.x);
+        match added {
+            Some(_x) => Value { x: self.x + other.x,y:self.y+other.y},
+            None =>  {
+                let rest = std::i64::MAX - self.x;
+                let unit = other.x - rest;
+                Value {x: unit,y:self.y+other.y+1} 
+            },
         }
-        else
-        {
-            Value {x: self.x + other.x, y: self.y + other.y}
-        }
+        
     }
     
 }
@@ -40,7 +42,13 @@ impl Add<i64> for Value{
     type Output = Value;
 
     fn add(self, other: i64) -> Value {
-        let added = self.x + other;
+        let added = self.x.checked_add(other);
+        match added {
+            Some(_x) => Value {x:self.x+other,y:self.y},
+            None => {
+                let rest = std::i64::MAX - self
+            }
+        }
         if added < self.x
         {
             Value {x: self.x + other, y: self.y +1}
