@@ -48,7 +48,7 @@ impl Add<i64> for Value{
             None => {
                 let rest = std::i64::MAX - self.x;
                 let unit = other - rest;
-                Value {x:unit,self.y+1}
+                Value {x:unit,y:self.y+1}
             }
         }
         
