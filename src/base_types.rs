@@ -46,17 +46,12 @@ impl Add<i64> for Value{
         match added {
             Some(_x) => Value {x:self.x+other,y:self.y},
             None => {
-                let rest = std::i64::MAX - self
+                let rest = std::i64::MAX - self.x;
+                let unit = other - rest;
+                Value {x:unit,self.y+1}
             }
         }
-        if added < self.x
-        {
-            Value {x: self.x + other, y: self.y +1}
-        }
-        else
-        {
-            Value {x: self.x + other, y: self.y}
-        }
+        
     }
     
     
