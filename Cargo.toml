@@ -1,0 +1,11 @@
+[package]
+name = "Syracuse-Project"
+version = "0.1.0"
+authors = ["Youness <kafia.youness@hotmail.fr>"]
+edition = "2018"
+
+[dependencies]
+
+[[bin]]
+name = "Syracuse"
+path = "src/Syracuse.rs"

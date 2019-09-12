@@ -1,13 +1,15 @@
-// mod base_types;
-// use base_types::Value;
+mod base_types;
+use base_types::Value;
 
 fn main() {
 
-    
-    let a:u8 = 255;
-    let b = a.checked_add(1);
+    let a:u8 = std::u8::MAX;
+    let b = a.checked_sub(1);
     match b {
-        Some(x) => println!("{}",x),
+        Some(x) => {
+            println!("{}",x);
+            println!("It's a value")
+        },
         None =>  println!("Result failed"),
     }
     

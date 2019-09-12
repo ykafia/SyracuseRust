@@ -40,7 +40,7 @@ impl Add<Value> for Value{
 }
 impl Add<i64> for Value{
     type Output = Value;
-
+    //TODO: Finish the add i64 to a value
     fn add(self, other: i64) -> Value {
         let added = self.x.checked_add(other);
         match added {
