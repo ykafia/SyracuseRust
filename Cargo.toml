@@ -7,5 +7,5 @@ edition = "2018"
 [dependencies]
 
 [[bin]]
-name = "Syracuse"
-path = "src/Syracuse.rs"
+name = "syracuse"
+path = "src/syracuse.rs"

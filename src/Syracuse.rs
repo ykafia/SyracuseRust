@@ -1,5 +1,15 @@
 mod base_types;
-use base_types::Value;
+//use base_types::Value;
+
+
+fn syracuse(n:u64)->u64{
+    match n%2{
+        0 => n/2,
+        1 => 3*n+1,
+        _ => 0
+    }
+}
+
 
 fn main() {
 

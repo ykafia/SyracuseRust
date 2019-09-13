@@ -5,8 +5,8 @@ use std::ops::{Add, AddAssign};
 
 
 pub struct Value{
-    pub x:i64,
-    pub y:i64
+    pub x:u64,
+    pub y:u64
 }
 
 impl fmt::Display for Value {
@@ -29,7 +29,7 @@ impl Add<Value> for Value{
         match added {
             Some(_x) => Value { x: self.x + other.x,y:self.y+other.y},
             None =>  {
-                let rest = std::i64::MAX - self.x;
+                let rest = std::u64::MAX - self.x;
                 let unit = other.x - rest;
                 Value {x: unit,y:self.y+other.y+1} 
             },
@@ -38,15 +38,15 @@ impl Add<Value> for Value{
     }
     
 }
-impl Add<i64> for Value{
+impl Add<u64> for Value{
     type Output = Value;
     //TODO: Finish the add i64 to a value
-    fn add(self, other: i64) -> Value {
+    fn add(self, other: u64) -> Value {
         let added = self.x.checked_add(other);
         match added {
             Some(_x) => Value {x:self.x+other,y:self.y},
             None => {
-                let rest = std::i64::MAX - self.x;
+                let rest = std::u64::MAX - self.x;
                 let unit = other - rest;
                 Value {x:unit,y:self.y+1}
             }
@@ -56,10 +56,10 @@ impl Add<i64> for Value{
     
     
 }
-impl AddAssign<i64> for Value{
+impl AddAssign<u64> for Value{
     
 
-    fn add_assign(&mut self, other: i64){
+    fn add_assign(&mut self, other: u64){
         let added = self.x + other;
         if added < self.x
         {
