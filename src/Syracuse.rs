@@ -10,6 +10,22 @@ fn syracuse(n:u64)->u64{
     }
 }
 
+struct SyracuseInfo{
+    flight:u64,
+    height:u64,
+    above_flight:u64
+}
+
+fn launch_syracuse(n:u64) -> SyracuseInfo{
+    let mut tmp = n;
+    let mut fl = 0;
+    while tmp!= 1
+    {
+        fl = fl+1;
+        tmp = syracuse(tmp);
+    }
+    SyracuseInfo {flight :0,height:0, above_flight:0}
+}
 
 fn main() {
 
@@ -22,15 +38,6 @@ fn main() {
         },
         None =>  println!("Result failed"),
     }
-    
-
-    // let mut a = Value {x:9223372036854775806,y:0};
-    // println!("{}",a);
-    // while a.y<2
-    // {
-    //     a+=1;
-    //     println!("{}",a);
-    // }
     
     
 }
