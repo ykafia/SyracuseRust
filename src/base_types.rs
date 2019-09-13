@@ -1,6 +1,6 @@
 use std::fmt;
-use std::ops::{Add, AddAssign};
-// , Sub
+use std::ops::{Add, Sub, AddAssign};
+
 
 
 
@@ -12,13 +12,30 @@ pub struct Value{
 impl fmt::Display for Value {
     // This trait requires `fmt` with this exact signature.
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        // Write strictly the first element into the supplied output
-        // stream: `f`. Returns `fmt::Result` which indicates whether the
-        // operation succeeded or failed. Note that `write!` uses syntax which
-        // is very similar to `println!`.
+        
         write!(f, "{}-{}", self.x, self.y)
     }
 }
+
+
+pub struct SyracuseInfo{
+    pub flight:u64,
+    pub height:u64,
+    pub above_flight:u64,
+    pub updated_above:bool,
+    pub current:u64,
+    pub init:u64
+}
+
+impl fmt::Display for SyracuseInfo {
+    // This trait requires `fmt` with this exact signature.
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        
+        write!(f, "Flight : {}\nHeight : {}\nAbove Flight : {}\n", self.flight, self.height,self.above_flight)
+    }
+}
+
+
 
 impl Add<Value> for Value{
     type Output = Value;
@@ -38,9 +55,26 @@ impl Add<Value> for Value{
     }
     
 }
+
+impl Sub<Value> for Value{
+    type Output = Value;
+
+    fn sub(self, other: Value) -> Value {
+        let added = self.x.checked_sub(other.x);
+        match added {
+            Some(_x) => Value { x: self.x - other.x,y:self.y-other.y},
+            None =>  {
+                let rest = other.x - self.x;
+                let unit = std::u64::MAX - rest;
+                Value {x: unit,y:self.y-other.y-1} 
+            },
+        }
+    }
+}
+
+
 impl Add<u64> for Value{
     type Output = Value;
-    //TODO: Finish the add i64 to a value
     fn add(self, other: u64) -> Value {
         let added = self.x.checked_add(other);
         match added {
@@ -53,8 +87,22 @@ impl Add<u64> for Value{
         }
         
     }
-    
-    
+}
+
+impl Sub<u64> for Value{
+    type Output = Value;
+    fn sub(self, other: u64) -> Value {
+        let added = self.x.checked_add(other);
+        match added {
+            Some(_x) => Value {x:self.x-other,y:self.y},
+            None => {
+                let rest = other - self.x;
+                let unit = std::u64::MAX - rest;
+                Value {x:unit,y:self.y-1}
+            }
+        }
+        
+    }
 }
 impl AddAssign<u64> for Value{
     
